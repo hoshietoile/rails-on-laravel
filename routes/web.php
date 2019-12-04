@@ -24,4 +24,11 @@ Route::get('/', function () {
     'uses' => 'StaticPages@getHelp',
     'as'   => 'help'
   ]);
+
+  Route::group(['prefix' => 'user'], function() {
+    Route::get('/login', [
+      'uses' => 'UsersController@login',
+      'as'   => 'login'
+    ]);
+  });
 // });
