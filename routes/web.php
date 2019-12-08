@@ -24,6 +24,11 @@ Route::get('/', function () {
     'as'   => 'help'
   ]);
 
+  Route::get('/users', [
+    'uses' => 'StaticPages@getUsers',
+    'as'   => 'users'
+  ]);
+
   Route::group(['prefix' => 'user'], function() {
     Route::get('/login', [
       'uses' => 'UsersController@getLogin',
@@ -64,6 +69,16 @@ Route::get('/', function () {
       Route::post('/update', [
         'uses' => 'UsersController@update',
         'as'   => 'user.update'
+      ]);
+
+      Route::get('/profile/{id}', [
+        'uses' => 'UsersController@profile',
+        'as'   => 'user.profile'
+      ]);
+
+      Route::delete('/delete/{id}', [
+        'uses' => 'UsersController@destroy',
+        'as'   => 'user.destroy'
       ]);
     });
   });

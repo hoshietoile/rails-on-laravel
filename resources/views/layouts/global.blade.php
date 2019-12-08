@@ -12,8 +12,10 @@
   @include('layouts.header')
 
   <div class="container">
-    @if (Session::has('flash_message'))
-    <p class="alert alert-success">{!! Session::get('flash_message') !!}</p>
+    @if (Session::has('success_message'))
+    <p class="alert alert-success">{!! Session::get('success_message') !!}</p>
+    @elseif (Session::has('danger_message'))
+    <p class="alert alert-danger">{!! Session::get('danger_message') !!}</p>
     @endif
     @yield('content')
   </div>

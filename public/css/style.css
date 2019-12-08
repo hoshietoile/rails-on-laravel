@@ -66,6 +66,7 @@ aside section.user_info {
 aside section {
   padding: 10px 0;
   margin-top: 20px;
+  border-right: 1px solid #666;
 }
 aside section:first-child {
   border: 0;
@@ -82,6 +83,11 @@ aside h1 {
   letter-spacing: -1px;
   margin-bottom: 3px;
   margin-top: 0px;
+}
+
+/*users*/
+#users p {
+  border-bottom: 1px solid #666;
 }
 
 /*login*/
