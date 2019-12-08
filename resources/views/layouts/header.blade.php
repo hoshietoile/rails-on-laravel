@@ -1,12 +1,22 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
+<header>
   <div class="container">
-    <a href="{{ action('StaticPages@getHome') }}" id="logo"></a>
-    <nav>
-      <ul>
-        <li><a href="{{ action('StaticPages@getHelp')}}">HELP</a></li>
-        <li><a href="{{ action('UsersController@login') }}">LOGIN</a></li>
-        <li><a href="{{ action('StaticPages@getHelp')}}">HOME</a></li>
-      </ul>
+    <nav class="navbar navbar-expand-md navbar-light">
+      <a class="navbar-brand" href="{{ action('StaticPages@getHome') }}" id="logo"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"><a class="nav-link" href="{{ route('help')}}">HELP</a></li>
+          @if(Auth::check())
+          <li class="nav-item"><a class="nav-link" href="{{ route('user.logout') }}">LOGOUT</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('user.show') }}">PROFILE</a></li>
+          @else
+          <li class="nav-item"><a class="nav-link" href="{{ route('user.getLogin') }}">LOGIN</a></li>
+          @endif
+          <li class="nav-item"><a class="nav-link" href="{{ route('home')}}">HOME</a></li>
+        </ul>
+      </div>
     </nav>
   </div>
 </header>

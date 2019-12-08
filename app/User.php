@@ -39,12 +39,12 @@ class User extends Authenticatable
     ];
 
     //before save,,,
-    //存在性バリデーション、、、
-    public function store(Request $request) {
-      $validated = $request->validate([
-        'name' => 'required|max:50',
-        'email' => 'required|email|unique:users|max:255',
-        'password' => 'required|min:8',
-      ]);
-    }
+    //存在性バリデーション,,,
+    // public function store(Request $request) {
+    //   $validated = $request->validate([
+    //     'name' => 'required|max:50',
+    //     'email' => 'required|email|unique:users|max:255',
+    //     'password' => 'required|min:8',
+    //   ]);
+    // }
 }

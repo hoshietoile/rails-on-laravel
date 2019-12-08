@@ -14,7 +14,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::group(['prefix' => 'staticPages'], function() {
   Route::get('/home', [
     'uses' => 'StaticPages@getHome',
     'as'   => 'home'
@@ -27,8 +26,34 @@ Route::get('/', function () {
 
   Route::group(['prefix' => 'user'], function() {
     Route::get('/login', [
-      'uses' => 'UsersController@login',
-      'as'   => 'login'
+      'uses' => 'UsersController@getLogin',
+      'as'   => 'user.getLogin'
     ]);
+
+    Route::post('/login', [
+      'uses' => 'UsersController@login',
+      'as'   => 'user.login'
+    ]);
+
+    Route::get('/signup', [
+      'uses' => 'UsersController@getSignup',
+      'as'   => 'user.getsignup'
+    ]);
+
+    Route::post('/signup', [
+      'uses' => 'UsersController@signup',
+      'as'   => 'user.signup'
+    ]);
+
+    Route::group(['middleware' => 'auth'], function() {
+      Route::get('/show', [
+        'uses' => 'UsersController@show',
+        'as'   => 'user.show'
+      ]);
+
+      Route::get('/logout', [
+        'uses' => 'UsersController@getLogout',
+        'as'   => 'user.logout'
+      ]);
+    });
   });
-// });
