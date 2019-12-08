@@ -2,6 +2,18 @@ body {
   background: #eee;
 }
 
+h1, h2, h3, h4, h5, h6, p, a, label, small {
+  color: #666;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+ul {
+  padding: 0;
+}
+
 li {
   list-style: none;
 }
@@ -12,13 +24,21 @@ li {
 .home-main {
   background-image: url(../images/logo.png);
 }
+/*header*/
+header ul {
+  display: flex;
+  width: 300px;
+  justify-content: space-between;
+}
+header li {
 
+}
 
 /*footer*/
 footer {
   margin-top: 45px;
   padding-top: 5px;
-  border-top: 1px solid #eaeaea;
+  border-top: 1px solid #666;
 }
 footer a {
   color: #555;
@@ -38,3 +58,77 @@ footer ul li {
   margin-left: 15px;
   font-size: 0.75em;
 }
+
+/*aside*/
+aside section.user_info {
+  margin-tio: 20px;
+}
+aside section {
+  padding: 10px 0;
+  margin-top: 20px;
+}
+aside section:first-child {
+  border: 0;
+  padding-top: 0;
+}
+aside section span {
+  display: block;
+  margin-bottom: 3px;
+  line-height: 1;
+}
+aside h1 {
+  font-size: 1.4em;
+  text-align: left;
+  letter-spacing: -1px;
+  margin-bottom: 3px;
+  margin-top: 0px;
+}
+
+/*login*/
+input, textarea, select, .uneditable-input {
+  width: 100%;
+  box-sizing: border-box;
+}
+/* .remember-box {
+  position: relative;
+} */
+#remember_me {
+  display: none;
+}
+/* #remember + label {
+  padding-bottom: 3px;
+}
+#remember + label:before {
+  content: "";
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #ccc;
+  background: #fff;
+  margin-right: 5px;
+}
+#remember + label:after {
+  content: "";
+  position: absolute;
+  transition: all 0.3s;
+}
+#remember:checked + label:before {
+  content: "";
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 1px solid green;
+  background: #fff;
+}
+#remember:checked + label:after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  width: 8px;
+  height: 3px;
+  left: 4px;
+  top: 7px;
+  border-left: 1px solid green;
+  border-bottom: 1px solid green;
+  transform: rotate(-45deg);
+} */
