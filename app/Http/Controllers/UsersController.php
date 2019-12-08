@@ -74,13 +74,49 @@ class UsersController extends Controller
     }
 
     public function show() {
-      // $user = new User();
-      // $user->name = $request->name;
-      // $user->email = $request->email;
-      // $user->password = $request->password;
-      // dd($user);
       return view('user.show');
     }
+
+    //1208//
+    public function edit($id) {
+      $user = User::find($id);
+      return view('user.edit', ['user' => $user]);
+    }
+
+    public function update(Request $request) {
+      $user = User::find($request->id);
+      $user->name = $request->name;
+      $user->email = $request->email;
+      $user->password = $request->password;
+      $user->save();
+
+      // $this->validate($request, [
+      //   'name' => 'required|max:50',
+      //   'email' => 'required|email|unique:users|max:255',
+      //   'password' => 'required|min:8',
+      // ], [
+      //   'name.required' => ':attributeは入れてくださいね。',
+      //   'name.max' => ':attributeは:maxより少なくしてくださいね。。',
+      //   'email.required' => ':attributeは入れてくださいね。',
+      //   'email.email' => ':attributeはEメールのフォーマットでお願いしますね。',
+      //   'email.unique' => ':attributeはほかの人に使われちゃってますね。',
+      //   'email.max' => ':attributeは:max文字以下でお願いしますね。',
+      //   'password.required' => ':attributeは入れてくださいね。',
+      //   'password.min' => ':attributeは:min文字以上でお願いしますね。',
+      // ], [
+      //   'name' => '名前',
+      //   'email' => 'Eメール',
+      //   'password' => 'パスワード',
+      // ]);
+      //
+      // if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
+        \Session::flash('flash_message', '登録に成功しましたよ！');
+        return redirect()->route('user.show');
+      // }
+      // return redirect()->back();
+    }
+
+    //1208//
 
     public function getLogout() {
       Auth::logout();

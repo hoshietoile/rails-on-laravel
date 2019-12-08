@@ -55,5 +55,15 @@ Route::get('/', function () {
         'uses' => 'UsersController@getLogout',
         'as'   => 'user.logout'
       ]);
+
+      Route::get('/edit/{id}', [
+        'uses' => 'UsersController@edit',
+        'as'   => 'user.edit'
+      ]);
+
+      Route::post('/update', [
+        'uses' => 'UsersController@update',
+        'as'   => 'user.update'
+      ]);
     });
   });
