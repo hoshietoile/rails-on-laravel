@@ -11,9 +11,9 @@
         <div class="card-body">
           {{ $user->name }}さんのページへ。
           @if (Auth::user()->admin == 1)
-            {!! Form::open(['action' => ['UsersController@destroy', $user->id], 'method' => 'DELETE']) !!}
+            {!! Form::open(['action' => ['UsersController@destroy', $user->id], 'method' => 'DELETE', 'id' => 'form_'.$user->id]) !!}
             {{ method_field('delete') }}
-              <input type="submit" value="|削除" style="display:inline-block;background:transparent;border:none;">
+              <input type="submit" value="削除" data-id="{{ $user->id }}"  style="display:inline-block;background:transparent;border:none;" onclick="deleteSubmit(this)">
             {!! Form::close() !!}
           @endif
         </div>
@@ -24,4 +24,11 @@
     {{ $users->links() }}
   </div>
 <!-- </div> -->
+<script>
+  function deleteSubmit(e) {
+    if (confirm('you sure?')) {
+      document.getElementById('form_' + e.dataset.id).submit();
+    }
+  }
+</script>
 @endsection

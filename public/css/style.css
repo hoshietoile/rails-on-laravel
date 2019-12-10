@@ -2,7 +2,7 @@ body {
   background: #eee;
 }
 
-h1, h2, h3, h4, h5, h6, p, a, label, small {
+h1, h2, h3, h4, h5, h6, p, a, label, small, input {
   color: #666;
   -moz-user-select: none;
   -webkit-user-select: none;
