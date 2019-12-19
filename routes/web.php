@@ -80,5 +80,18 @@ Route::get('/', function () {
         'uses' => 'UsersController@destroy',
         'as'   => 'user.destroy'
       ]);
+
     });
+  });
+
+  Route::group(['prefix' => 'micropost'], function(){
+    Route::post('/{id}/create', [
+      'uses' => 'MicropostsController@create',
+      'as'   => 'micropost.create'
+    ]);
+
+    Route::delete('/{id}/delete', [
+      'uses' => 'MicropostsController@destroy',
+      'as'   => 'micropost.destroy'
+    ]);
   });

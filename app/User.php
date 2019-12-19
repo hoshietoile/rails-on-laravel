@@ -38,6 +38,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function micropost() {
+      return $this->hasMany('App\Micropost');
+    }
+
     //before save,,,
     //存在性バリデーション,,,
     // public function store(Request $request) {

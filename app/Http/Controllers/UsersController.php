@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Micropost;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -76,12 +77,19 @@ class UsersController extends Controller
     }
 
     public function show() {
-      return view('user.show');
+      $microposts = Micropost::where('user_id', 'LIKE', Auth::user()->id)->orderBy('updated_at', 'DESC')->paginate(10);
+      $count = count(Micropost::all()->where('user_id', 'LIKE', Auth::user()->id));
+      return view('user.show', ['microposts' => $microposts, 'count' => $count]);
     }
 
     public function profile($id) {
       $user = User::find($id);
-      return view('user.profile', ['user' => $user]);
+      $microposts = Micropost::where('user_id', 'LIKE', $id)->orderBy('updated_at', 'DESC')->paginate(10);
+      $count = count(Micropost::all()->where('user_id', 'LIKE', $id));
+      // https://stackoverflow.com/questions/48148472/laravel-method-paginate-does-not-exist
+      // https://qiita.com/Otake_M/items/e07aea161aa66265fd09
+      // $microposts = DB::table('microposts')->where('user_id', 'LIKE', $id)->orderByRaw('updated_at DESC');
+      return view('user.profile', ['user' => $user, 'microposts' => $microposts, 'count' => $count]);
     }
 
     public function edit($id) {
