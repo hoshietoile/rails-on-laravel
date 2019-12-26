@@ -43,13 +43,14 @@
       <div class="card">
           <div class="card-body">
             @if (Auth::user()->admin == 1 && $user->id != Auth::user()->id)
-              {!! Form::open(['action' => ['UsersController@destroy', $user->id], 'method' => 'DELETE', 'id' => 'form_'.$user->id]) !!}
-              {{ method_field('delete') }}
+            {{--  {!! Form::open(['action' => ['UsersController@destroy', $user->id], 'method' => 'DELETE', 'id' => 'form_'.$user->id]) !!}  --}}
+              {{-- method_field('delete') --}}
                 <a href="{{ route('user.profile', $user->id) }}">
                   {{ $user->name }}さんのページへ。
                 </a>
-                <input type="button" value="|削除" data-id="{{ $user->id }}"  style="display:inline;background:transparent;border:none;width:auto;" onclick="deleteSubmit(this)">
-              {!! Form::close() !!}
+                <input type="button" value="|削除" id="delete_{{ $user->id }}" data-id="{{ $user->id }}"  style="display:inline;background:transparent;border:none;width:auto;">
+                <!-- onclick="deleteSubmit(this)" -->
+              {{--{!! Form::close() !!}--}}
             @else
               <a href="{{ route('user.profile', $user->id) }}">
                 {{ $user->name }}さんのページへ。
@@ -64,11 +65,32 @@
   </div>
 </div>
 <script>
-  function deleteSubmit(e) {
-    if (confirm('you sure?')) {
-      document.getElementById('form_' + e.dataset.id).submit();
-    }
-  }
+  // function deleteSubmit(e) {
+  //   if (confirm('you sure?')) {
+  //     document.getElementById('form_' + e.dataset.id).submit();
+  //   }
+  // }
 
+  $(function() {
+
+    $("input[type='button']").click(function() {
+      var val = $(this).attr('id');
+      $.ajax({
+        headers: {
+          'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ url('user/delete/{$user->id}') }}",
+        type: 'POST',
+        data: {'user_id': {{ $user->id }}, '_method': 'DELETE'}
+      })
+
+      .done(function(data) {
+        $('.delete_message').text(data.responseJSON);
+      })
+      .fail(function(data) {
+        alert(data.responseJSON);
+      });
+    });
+  });
 </script>
 @endsection
